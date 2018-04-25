@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+//Question 1
+/*code Explanation:
+"count" equal to number of second array
+scan each elements in second array, if the element is shown up in the first array, "count" will count down.
+if "count" down to 0, return true.
+*/
+	var test_case_1a = ["A","B","C","D","E"];
+	var test_case_1b = ["A","E","D"];
+
+	var test_case_2a = ["A","B","C","D","E"];
+	var test_case_2b = ["A","D","Z"];
+
+	var test_case_3a = ["A","D","E"];
+	var test_case_3b = ["A","A","D","E"];
+
+	function isSubset(first_array,second_array){
+		var count = second_array.length;
+		for(var i=0;i<second_array.length;i++){
+			for(var j=0;j<first_array.length;j++){
+				if(second_array[i]===first_array[j]){count--;break;}
+			}
+		}
+
+		if (count==0){return true;}
+		else {return false;}
+	}
+
+
+	console.log(isSubset(test_case_1a,test_case_1b));
+	console.log(isSubset(test_case_2a,test_case_2b));
+	console.log(isSubset(test_case_3a,test_case_3b));
+
+//Questtion 2
+/* Computational complexity of my answer in question is O(n^2)
+There are 3 rules in big O notation:
+rule 1: worst case
+rule 2: ignore constants
+rule 3: certains term "dominate" others : O(1) < O(n) < O(nlogn) < O(n^2) < O(2^n) < O(n!)
+
+My answer worst case process is about m * n * 2 + 1 , which m = size of second_array, n = size of first_array.
+Therefore the complexity is about O(n^2).
+*/
+
+//Question 3
+/*code Explanation:
+Calculate_Fibonacci_Series is to create Fibonacci Series in array, for example Calculate_Fibonacci_Series(4) = [1,1,2,3];
+Pop_next_fibonacci is to find next Fibonacci number,  for example Pop_next_fibonacci(8) = 13;
+nextFibonacci is to output all "next Fibonacci number" of the input array elements
+*/
+	var test_case_4 = [1,8,21]
+
+	var Fibonacci_Series;
+
+	function Calculate_Fibonacci_Series(n){
+		Fibonacci_Series = [1,1];
+	for(var k=0;k<n;k++){
+		var x = Fibonacci_Series[k]+Fibonacci_Series[k+1];
+		Fibonacci_Series.push(x);
+	}
+	console.log(Fibonacci_Series.toString());
+	}
+
+	function Pop_next_fibonacci(m){
+		if(m<=927372692193079200000){Calculate_Fibonacci_Series(100);}
+		else{Calculate_Fibonacci_Series(m);}
+		for(var l=1;l<m;l++){
+			if(m==Fibonacci_Series[l]){break;}
+		}
+		console.log(Fibonacci_Series[l+1]);
+		return Fibonacci_Series[l+1];
+	}
+
+
+	function nextFibonacci(test){
+		var output_array = [];
+		for(var p=0;p<test.length;p++){
+			output_array.push(Pop_next_fibonacci(test[p]));
+		}
+		console.log(output_array.toString());
+		return output_array;
+	}
+
+	nextFibonacci(test_case_4);
+
+//Question 4
+/*
+「function createArrayOfFunctions(y) {
+var arr = [];
+for(var i = 0; i<y; i++) {
+arr[i] = function(x) { return x + i; }
+}
+return arr;
+}」
+
+I guess the above program is to read x and y, output an array with size of y, start with (x) and end with (x+y);
+the problems are as following:
+
+1: "function(x) { return x + i; } " is treated as a string and store in arr[i]
+2: x is undefined
+3: function name is missing
+
+Here are the solution
+*/
+function createArrayOfFunctions(y,x) {
+var arr = [];
+for(var i = 0; i<y; i++) {
+arr[i] =   x + i ;
+}
+console.log(arr.toString());
+return arr;
+}
+createArrayOfFunctions(5,6);
+
+</script>
+</body>
+</html>
